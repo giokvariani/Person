@@ -15,7 +15,8 @@ namespace BasePerson.Persistence.Repositories
         public virtual async Task<int> CreateAsync(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
-            return await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
+            return entity.Id;
         }
         public virtual async Task<int> CreaRangeteAsync(IEnumerable<TEntity> entity)
         {

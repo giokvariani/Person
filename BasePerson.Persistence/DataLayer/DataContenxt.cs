@@ -9,7 +9,7 @@ namespace BasePerson.Persistence.DataLayer
         {
 
         }
-        public DbSet<Model.BusinessObjects.Person> Persons { get; set; }
+        public DbSet<Person> Persons { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Phone2Person> Phone2People { get; set; }

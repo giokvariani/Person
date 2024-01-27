@@ -1,11 +1,24 @@
+using BasePerson.Application.Interfaces;
+using BasePerson.Persistence.DataLayer;
+using BasePerson.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+
+var services = builder.Services;
+services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+var configuration = builder.Configuration;
+
+var connectionString = configuration.GetConnectionString("ConnectionString");
+services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("BasePerson.API")));
+
+builder.Services.AddScoped<ICityRepository, CityRepository>();
 
 var app = builder.Build();
 

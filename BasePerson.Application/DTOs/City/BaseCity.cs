@@ -1,7 +1,8 @@
 ﻿namespace BasePerson.Application.DTOs.City
 {
-    public class GetCityDto : CityDto
+    public class BaseCityDto
     {
         public int Id { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }
