@@ -1,6 +1,6 @@
 ﻿namespace BasePerson.Application.DTOs.City
 {
-    public class GetCityDto : CityDto
+    public class ExistingCityDto : CityDto
     {
         public int Id { get; set; }
     }

@@ -10,6 +10,7 @@ namespace BasePerson.API.Controllers
     public class CityController : ControllerBase
     {
         private readonly ICityRepository _cityRepository;
+        private readonly IMediator
         public CityController(ICityRepository cityRepository)
         {
             _cityRepository = cityRepository;
