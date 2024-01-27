@@ -1,4 +1,4 @@
-﻿namespace Person.Application.DTOs.Person
+﻿namespace BasePerson.Application.DTOs.Person
 {
     public class SetPerson2PhoneDto
     {

@@ -1,6 +1,6 @@
-﻿using Person.Model.Enums;
+﻿using BasePerson.Model.Enums;
 
-namespace Person.Application.DTOs.Person
+namespace BasePerson.Application.DTOs.Person
 {
     public class SetConnectedPersonDto
     {

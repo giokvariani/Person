@@ -1,4 +1,4 @@
-﻿namespace Person.Model.Enums
+﻿namespace BasePerson.Model.Enums
 {
     public enum Gender
     {

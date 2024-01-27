@@ -1,6 +1,6 @@
-﻿using Person.Model.Enums;
+﻿using BasePerson.Model.Enums;
 
-namespace Person.Application.DTOs.Phone
+namespace BasePerson.Application.DTOs.Phone
 {
     public class SetPhoneDto
     {

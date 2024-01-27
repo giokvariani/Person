@@ -1,4 +1,4 @@
-﻿namespace Person.Model.BusinessObjects
+﻿namespace BasePerson.Model.BusinessObjects
 {
     public class BusinessObject
     {

@@ -1,6 +1,4 @@
-﻿using Person.Application.DTOs.Person;
-
-namespace Person.Application.DTOs
+﻿namespace BasePerson.Application.DTOs.Person
 {
     public class GetConnectedPersonDto
     {

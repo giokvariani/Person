@@ -1,7 +1,7 @@
-﻿using Person.Application.DTOs.City;
-using Person.Model.Enums;
+﻿using BasePerson.Application.DTOs.City;
+using BasePerson.Model.Enums;
 
-namespace Person.Application.DTOs.Person
+namespace BasePerson.Application.DTOs.Person
 {
     public class GetPersonDto
     {

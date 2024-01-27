@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BasePerson.Model.BusinessObjects;
 
-namespace Person.Application.Interfaces
+namespace BasePerson.Application.Interfaces
 {
-    internal class IConnectedPersonRepository
+    public interface IConnectedPersonRepository : IRepository<ConnectedPerson>
     {
     }
 }

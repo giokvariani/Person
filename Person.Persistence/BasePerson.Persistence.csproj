@@ -6,6 +6,9 @@
 <Nullable>enable</Nullable>
 </PropertyGroup>
 <ItemGroup>
-  <ProjectReference Include="..\Person.Application\Person.Application.csproj" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.26" />
+</ItemGroup>
+<ItemGroup>
+  <ProjectReference Include="..\Person.Application\BasePerson.Application.csproj" />
 </ItemGroup>
 </Project>

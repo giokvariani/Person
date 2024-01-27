@@ -1,6 +1,4 @@
-﻿using Person.Model.Enums;
-
-namespace Person.Model.BusinessObjects
+﻿namespace BasePerson.Model.BusinessObjects
 {
     public class Phone : BusinessObject
     {

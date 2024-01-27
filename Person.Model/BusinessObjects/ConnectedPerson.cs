@@ -1,6 +1,6 @@
-﻿using Person.Model.Enums;
+﻿using BasePerson.Model.Enums;
 
-namespace Person.Model.BusinessObjects
+namespace BasePerson.Model.BusinessObjects
 {
     public class ConnectedPerson : BusinessObject
     {

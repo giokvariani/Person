@@ -1,4 +1,4 @@
-﻿namespace Person.Application.DTOs.Phone
+﻿namespace BasePerson.Application.DTOs.Phone
 {
     public class GetPhoneDto
     {

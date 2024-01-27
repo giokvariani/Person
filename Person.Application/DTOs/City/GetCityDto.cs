@@ -1,4 +1,4 @@
-﻿namespace Person.Application.DTOs.City
+﻿namespace BasePerson.Application.DTOs.City
 {
     public class GetCityDto : SetCityDto
     {
