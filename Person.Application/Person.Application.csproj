@@ -8,4 +8,7 @@
 <ItemGroup>
   <ProjectReference Include="..\Person.Model\Person.Model.csproj" />
 </ItemGroup>
+<ItemGroup>
+  <Folder Include="Interfaces\" />
+</ItemGroup>
 </Project>
