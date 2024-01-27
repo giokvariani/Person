@@ -21,6 +21,7 @@ namespace BasePerson.Application.Features.City.Queries
             public async Task<ExistingCityDto> Handle(GetCityQuery request, CancellationToken cancellationToken)
             {
                 var city = await _cityRepository.ReadAsync(request.Id);
+
                 var existingCityDto = new ExistingCityDto() { Id = city.Id, Name = city.Name };
                 return existingCityDto;
             }

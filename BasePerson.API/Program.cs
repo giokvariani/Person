@@ -1,6 +1,8 @@
+using BasePerson.Application.DTOs.City;
 using BasePerson.Application.Interfaces;
 using BasePerson.Persistence.DataLayer;
 using BasePerson.Persistence.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,7 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
+services.AddMediatR(typeof(CityDto).Assembly);
 
 
 var configuration = builder.Configuration;

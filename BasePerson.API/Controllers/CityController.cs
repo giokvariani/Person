@@ -1,6 +1,9 @@
 using BasePerson.Application.DTOs.City;
+using BasePerson.Application.Features.City.Commands;
+using BasePerson.Application.Features.City.Queries;
 using BasePerson.Application.Interfaces;
 using BasePerson.Model.BusinessObjects;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasePerson.API.Controllers
@@ -9,65 +12,40 @@ namespace BasePerson.API.Controllers
     [ApiController]
     public class CityController : ControllerBase
     {
-        private readonly ICityRepository _cityRepository;
-        private readonly IMediator
-        public CityController(ICityRepository cityRepository)
-        {
-            _cityRepository = cityRepository;
-        }
+        private readonly IMediator _mediator;
+        public CityController(IMediator mediator) => _mediator = mediator;
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCity(int id)
         {
-            var city = await _cityRepository.ReadAsync(id);
-            return city == null ? NotFound() : Ok(city);
+            var cityQuery = new GetCityQuery(id);
+            var existingCity = await _mediator.Send(cityQuery);
+            return Ok(existingCity);
         }
 
         [HttpPost]
-        public async Task<IActionResult> City(City city)
+        public async Task<IActionResult> City(CityDto city)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            var createdCity = await _cityRepository.CreateAsync(city);
-            return Ok(createdCity);
+            var cityCommand = new CreateCityCommand(city);
+            var cityId = await _mediator.Send(cityCommand);
+            return Ok(cityId);
         }
 
-        // DELETE method to delete an existing city
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCity(int id)
         {
-            var city = await _cityRepository.ReadAsync(id);
-            if (city == null)
-            {
-                return NotFound();
-            }
-
-            await _cityRepository.DeleteAsync(id);
-            return NoContent();
+            var cityCommand = new DeleteCityCommand(id);
+            var result = await _mediator.Send(cityCommand);
+            return Ok(result);
         }
 
-        // PUT method to update an existing city
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutCity(SetCityDto)
-        //{
-        //    if (id != cityModel.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    try
-        //    {
-        //        await _cityRepository.UpdateAsync(cityModel);
-        //    }
-        //    catch (KeyNotFoundException)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return NoContent();
-        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCity(ExistingCityDto existingCityDto)
+        {
+            var updateCityCommand = new UpdateCityCommand(existingCityDto);
+            var result = await _mediator.Send(updateCityCommand);
+            return Ok(result);
+        }
     }
 
 }

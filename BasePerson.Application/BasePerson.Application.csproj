@@ -9,6 +9,6 @@
   <ProjectReference Include="..\BasePerson.Model\BasePerson.Model.csproj" />
 </ItemGroup>
 <ItemGroup>
-  <PackageReference Include="MediatR" Version="12.2.0" />
+  <PackageReference Include="MediatR" Version="10.0.1" />
 </ItemGroup>
 </Project>
