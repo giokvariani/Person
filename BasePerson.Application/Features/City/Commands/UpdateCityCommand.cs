@@ -10,7 +10,6 @@ namespace BasePerson.Application.Features.City.Commands
         public UpdateCityCommand(ExistingCityDto cityDto)
         {            CityDto = cityDto;  
         }
-
         public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand, int>
         {
             private readonly ICityRepository _cityRepository;
@@ -21,10 +20,10 @@ namespace BasePerson.Application.Features.City.Commands
             public async Task<int> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
             {
                 var name = request.CityDto.Name;
-                var sameCountry = (await _cityRepository.ReadAsync(x => x.Name == name && request.CityDto.Id != x.Id)).FirstOrDefault();
+                var sameCity = (await _cityRepository.ReadAsync(x => x.Name == name && request.CityDto.Id != x.Id)).FirstOrDefault();
 
-                if (sameCountry != null)
-                    throw new InvalidOperationException($"City {name} already exists! ID:{sameCountry.Id}");
+                if (sameCity != null)
+                    throw new InvalidOperationException($"City {name} already exists! ID:{sameCity.Id}");
 
                 var city = new Model.BusinessObjects.City() { Name = request.CityDto.Name, Id = request.CityDto.Id , UpdatedOn = DateTime.Now };
                 return await _cityRepository.UpdateAsync(request.CityDto.Id, city);

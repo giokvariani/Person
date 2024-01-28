@@ -6,12 +6,6 @@ namespace BasePerson.Application.Features.City.Queries
 {
     public class GetCitiesQuery : IRequest<List<ExistingCityDto>>
     {
-        public int Id { get; }
-        public GetCitiesQuery(int id)
-        {
-
-            Id = id;
-        }
         public class GetCitiesQueryHandler : IRequestHandler<GetCitiesQuery, List<ExistingCityDto>>
         {
             private readonly ICityRepository _cityRepository;

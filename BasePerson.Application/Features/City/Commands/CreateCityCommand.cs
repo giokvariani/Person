@@ -21,7 +21,7 @@ namespace BasePerson.Application.Features.City.Commands
                 var existingCity = (await _cityRepository.ReadAsync(x => x.Name == name)).SingleOrDefault();
 
                 if (existingCity != null)
-                    throw new InvalidOperationException($"City {name} already exists.");
+                    throw new InvalidOperationException($"City: {name} already exists.");
 
                 var city = new Model.BusinessObjects.City() { CreatedOn = DateTime.Now, Name = name };
                 return await _cityRepository.CreateAsync(city);
