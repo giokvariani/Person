@@ -25,7 +25,8 @@ var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("ConnectionString");
 services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("BasePerson.API")));
 
-builder.Services.AddScoped<ICityRepository, CityRepository>();
+services.AddScoped<ICityRepository, CityRepository>();
+services.AddScoped<IPersonRepository, PersonRepository>();
 
 var app = builder.Build();
 

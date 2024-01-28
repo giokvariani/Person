@@ -1,45 +1,63 @@
-﻿//using MediatR;
-//using Microsoft.AspNetCore.Mvc;
+﻿using BasePerson.Application.DTOs.Person;
+using BasePerson.Application.Features.Person;
+using BasePerson.Application.Features.Person.Queries;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
-//namespace BasePerson.API.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class PersonController : ControllerBase
-//    {
-//        private readonly IMediator _mediator;
-//        public PersonController(IMediator mediator) => _mediator = mediator;
+namespace BasePerson.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PersonController : ControllerBase
+    {
+        private readonly IMediator _mediator;
+        public PersonController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
-//        [HttpGet("{id}")]
-//        public async Task<IActionResult> GetCity(int id)
-//        {
-//            var cityQuery = new GetPersonQuery(id);
-//            var existingCity = await _mediator.Send(cityQuery);
-//            return Ok(existingCity);
-//        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPerson(int id)
+        {
+            var query = new GetPersonQuery { Id = id };
+            var person = await _mediator.Send(query);
+            return Ok(person);
+        }
 
-//        [HttpPost]
-//        public async Task<IActionResult> City(PersonDto city)
-//        {
-//            var cityCommand = new CreatePersonCommand(city);
-//            var cityId = await _mediator.Send(cityCommand);
-//            return Ok(cityId);
-//        }
+        [HttpGet]
+        public async Task<IActionResult> GetPeople()
+        {
+            var query = new GetPeopleQuery();
+            var people = await _mediator.Send(query);
+            return Ok(people);
+        }
 
-//        [HttpDelete("{id}")]
-//        public async Task<IActionResult> DeleteCity(int id)
-//        {
-//            var cityCommand = new DeletePersonCommand(id);
-//            var result = await _mediator.Send(cityCommand);
-//            return Ok(result);
-//        }
+        [HttpPost]
+        public async Task<IActionResult> CreatePerson([FromBody] PersonDto personDto)
+        {
+            var command = new CreatePersonCommand { PersonDto = personDto };
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
-//        [HttpPut]
-//        public async Task<IActionResult> UpdateCity(ExistingCityDto existingCityDto)
-//        {
-//            var updateCityCommand = new UpdateCityCommand(existingCityDto);
-//            var result = await _mediator.Send(updateCityCommand);
-//            return Ok(result);
-//        }
-//    }
-//}
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePerson(int id)
+        {
+            var command = new DeletePersonCommand { Id = id };
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePerson([FromBody] ExistingPersonDto personDto)
+        {
+            var command = new UpdatePersonCommand { PersonDto = personDto };
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+    }
+}

@@ -21,6 +21,13 @@ namespace BasePerson.API.Controllers
             return Ok(existingCity);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<ExistingCityDto>>> GetCities()
+        {
+            var cities = await _mediator.Send(new GetCitiesQuery());
+            return Ok(cities);
+        }
+
         [HttpPost]
         public async Task<IActionResult> City(CityDto city)
         {
@@ -34,7 +41,7 @@ namespace BasePerson.API.Controllers
         {
             var cityCommand = new DeleteCityCommand(id);
             var result = await _mediator.Send(cityCommand);
-            return Ok(result);  
+            return Ok(result);
         }
 
         [HttpPut]
