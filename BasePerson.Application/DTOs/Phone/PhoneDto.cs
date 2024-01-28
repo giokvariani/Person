@@ -2,7 +2,7 @@
 
 namespace BasePerson.Application.DTOs.Phone
 {
-    public class SetPhoneDto
+    public class PhoneDto
     {
         public PhoneType Type { get; set; }
         public string Number { get; set; }

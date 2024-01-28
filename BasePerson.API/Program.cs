@@ -27,6 +27,9 @@ services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionStr
 
 services.AddScoped<ICityRepository, CityRepository>();
 services.AddScoped<IPersonRepository, PersonRepository>();
+services.AddScoped<IPhoneRepository, PhoneRepository>();
+
+
 
 var app = builder.Build();
 

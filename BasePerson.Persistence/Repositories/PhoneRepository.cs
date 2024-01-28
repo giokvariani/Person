@@ -9,5 +9,11 @@ namespace BasePerson.Persistence.Repositories
         public PhoneRepository(DataContext context) : base(context)
         {
         }
+
+        public async Task<Phone?> ReadAsync(string number)
+        {
+            var phone = (await ReadAsync(x => x.Number == number)).SingleOrDefault();
+            return phone;
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace BasePerson.API.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpdatePerson([FromBody] ExistingPersonDto personDto)
         {
             var command = new UpdatePersonCommand { PersonDto = personDto };

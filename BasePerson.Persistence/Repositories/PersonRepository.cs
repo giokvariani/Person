@@ -10,7 +10,6 @@ namespace BasePerson.Persistence.Repositories
         public PersonRepository(DataContext context) : base(context)
         {
         }
-
         public async Task<Person?> ReadAsync(string idNumber)
         {
             var person = (await ReadAsync(x => x.IDNumber == idNumber)).SingleOrDefault();
