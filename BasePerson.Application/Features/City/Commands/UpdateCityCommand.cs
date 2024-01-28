@@ -24,7 +24,7 @@ namespace BasePerson.Application.Features.City.Commands
                 var sameCountry = (await _cityRepository.ReadAsync(x => x.Name == name && request.CityDto.Id != x.Id)).FirstOrDefault();
 
                 if (sameCountry != null)
-                    throw new InvalidOperationException($"City {name} already exists! ID:{sameCountry}");
+                    throw new InvalidOperationException($"City {name} already exists! ID:{sameCountry.Id}");
 
                 var city = new Model.BusinessObjects.City() { Name = request.CityDto.Name, Id = request.CityDto.Id , UpdatedOn = DateTime.Now };
                 return await _cityRepository.UpdateAsync(request.CityDto.Id, city);

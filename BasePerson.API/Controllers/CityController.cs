@@ -1,8 +1,6 @@
 using BasePerson.Application.DTOs.City;
 using BasePerson.Application.Features.City.Commands;
 using BasePerson.Application.Features.City.Queries;
-using BasePerson.Application.Interfaces;
-using BasePerson.Model.BusinessObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,10 +34,10 @@ namespace BasePerson.API.Controllers
         {
             var cityCommand = new DeleteCityCommand(id);
             var result = await _mediator.Send(cityCommand);
-            return Ok(result);
+            return Ok(result);  
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpdateCity(ExistingCityDto existingCityDto)
         {
             var updateCityCommand = new UpdateCityCommand(existingCityDto);

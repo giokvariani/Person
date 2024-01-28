@@ -1,4 +1,5 @@
-﻿using BasePerson.Application.Interfaces;
+﻿using BasePerson.Application.Exceptions;
+using BasePerson.Application.Interfaces;
 using MediatR;
 
 namespace BasePerson.Application.Features.City.Commands
@@ -20,7 +21,10 @@ namespace BasePerson.Application.Features.City.Commands
             }
             public async Task<int> Handle(DeleteCityCommand request, CancellationToken cancellationToken)
             {
-                 return await _cityRepository.DeleteAsync(request.Id);
+                var city = await _cityRepository.ReadAsync(request.Id);
+                if (city == null)
+                    throw new EntityNotFoundException();
+                return await _cityRepository.DeleteAsync(request.Id);
             }
         }
     }

@@ -18,7 +18,7 @@ namespace BasePerson.Application.Features.City.Commands
             public async Task<int> Handle(CreateCityCommand request, CancellationToken cancellationToken)
             {
                 var name = request.CityDto.Name;
-                var existingCity = await _cityRepository.ReadAsync(x => x.Name == name);
+                var existingCity = (await _cityRepository.ReadAsync(x => x.Name == name)).SingleOrDefault();
 
                 if (existingCity != null)
                     throw new InvalidOperationException($"City {name} already exists.");

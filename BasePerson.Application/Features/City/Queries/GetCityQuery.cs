@@ -1,4 +1,5 @@
 ﻿using BasePerson.Application.DTOs.City;
+using BasePerson.Application.Exceptions;
 using BasePerson.Application.Interfaces;
 using MediatR;
 
@@ -21,7 +22,8 @@ namespace BasePerson.Application.Features.City.Queries
             public async Task<ExistingCityDto> Handle(GetCityQuery request, CancellationToken cancellationToken)
             {
                 var city = await _cityRepository.ReadAsync(request.Id);
-
+                if (city == null)
+                    throw new EntityNotFoundException();
                 var existingCityDto = new ExistingCityDto() { Id = city.Id, Name = city.Name };
                 return existingCityDto;
             }

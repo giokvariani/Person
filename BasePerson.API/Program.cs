@@ -1,3 +1,4 @@
+using BasePerson.API.Middlewares;
 using BasePerson.Application.DTOs.City;
 using BasePerson.Application.Interfaces;
 using BasePerson.Persistence.DataLayer;
@@ -34,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandler>();
 
 app.UseHttpsRedirection();
 
