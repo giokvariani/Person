@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using BasePerson.Application.Interfaces;
+//using BasePerson.Model.Enums;
+//using MediatR;
 
-namespace BasePerson.Application.Features.Person.Commands
-{
-    internal class DisconnectPeopleCommand
-    {
-    }
-}
+//namespace BasePerson.Application.Features.Person.Commands
+//{
+//    public class DisconnectPeopleCommand : IRequest<int>
+//    {
+//        public int Id { get; set; }
+//        public DisconnectPeopleCommand(int id)
+//        {
+//            Id = id;
+//        }
+//        public class DisconnectPeopleCommandHandler : IRequestHandler<DisconnectPeopleCommand, int>
+//        {
+//            private readonly IConnectedPeopleRepository _connectedPeopleRepository;
+//            public DisconnectPeopleCommandHandler(IConnectedPeopleRepository connectedPeopleRepository)
+//            {
+//                _connectedPeopleRepository = connectedPeopleRepository;
+//            }
+//            public Task<int> Handle(DisconnectPeopleCommand request, CancellationToken cancellationToken)
+//            {
+
+//            }
+//        }
+//    }
+//}

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BasePerson.Model.Enums;
 
 namespace BasePerson.Application.DTOs.Person
 {
-    internal class ConnectedPeopleDto
+    public class ConnectedPeopleDto
     {
+        public int MainId { get; set; }
+        public int LinkedId { get; set; }
+        public ConnectionType Type { get; set; }
+
     }
 }

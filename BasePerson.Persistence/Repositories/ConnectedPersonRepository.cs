@@ -4,9 +4,9 @@ using BasePerson.Persistence.DataLayer;
 
 namespace BasePerson.Persistence.Repositories
 {
-    public class ConnectedPersonRepository : Repository<ConnectedPerson>, IConnectedPersonRepository
+    public class ConnectedPeopleRepository : Repository<ConnectedPeople>, IConnectedPeopleRepository
     {
-        public ConnectedPersonRepository(DataContext context) : base(context)
+        public ConnectedPeopleRepository(DataContext context) : base(context)
         {
         }
     }

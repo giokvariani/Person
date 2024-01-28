@@ -2,7 +2,7 @@
 
 namespace BasePerson.Application.Interfaces
 {
-    public interface IConnectedPersonRepository : IRepository<ConnectedPerson>
+    public interface IConnectedPeopleRepository : IRepository<ConnectedPeople>
     {
     }
 }

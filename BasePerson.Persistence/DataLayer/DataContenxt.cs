@@ -13,6 +13,6 @@ namespace BasePerson.Persistence.DataLayer
         public DbSet<City> Cities { get; set; }
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Phone2Person> Phone2People { get; set; }
-        public DbSet<ConnectedPerson> ConnectedPeople { get; set; }
+        public DbSet<ConnectedPeople> ConnectedPeople { get; set; }
     }
 }

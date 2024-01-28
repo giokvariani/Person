@@ -2,7 +2,7 @@
 
 namespace BasePerson.Model.BusinessObjects
 {
-    public class ConnectedPerson : BusinessObject
+    public class ConnectedPeople : BusinessObject
     {
         public int MainId { get; set; }
         public int LinkedId { get; set; }
