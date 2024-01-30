@@ -30,11 +30,11 @@ namespace BasePerson.Application.Features.Person.Commands
 
                 var mainPerson = await _personRepository.ReadAsync(peopleDto.MainId);
                 if (mainPerson == null)
-                    throw new EntityNotFoundException($"{peopleDto.MainId}");
+                    throw new EntityNotFoundException($"PersonID: {peopleDto.MainId}");
 
                 var linkedPerson = await _personRepository.ReadAsync(peopleDto.LinkedId);
                 if (linkedPerson == null)
-                    throw new EntityNotFoundException($"{peopleDto.LinkedId}");
+                    throw new EntityNotFoundException($"PersonID: {peopleDto.LinkedId}");
                 
                 var existingConnectedPeople = (await _connectedPeopleRepository.ReadAsync(x => x.MainId == peopleDto.MainId && x.LinkedId == peopleDto.LinkedId && x.Type == peopleDto.Type)).SingleOrDefault();
                 if (existingConnectedPeople != null)
