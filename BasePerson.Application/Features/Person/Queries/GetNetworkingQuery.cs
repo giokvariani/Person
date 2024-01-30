@@ -21,21 +21,29 @@ namespace BasePerson.Application.Features.Person.Queries
                 _personRepository = personRepository;
                 _connectedPeopleRepository = connectedPeopleRepository;
             }
-            private async Task<IReadOnlyCollection<SimplePerson>> GetSimplePeople(IReadOnlyCollection<ConnectedPeople> connectedPeopleCollection, Model.Enums.ConnectionType connectionType)
+            private async Task<IReadOnlyCollection<SimplePerson>> GetSimplePeople(IReadOnlyCollection<ConnectedPeople> connectedPeopleCollection, Model.Enums.ConnectionType connectionType, int personId)
             {
+                //foreach (var connectedPeople in connectedPeopleCollection)
+                //{
+                //    var mainIdIsPersonId = connectedPeople.MainId == personId;
+                //    var linkedIdIsPersonId = connectedPeople.LinkedId == personId;
+
+                    
+                //}
+
                 var specificTypePeople = connectedPeopleCollection.Where(x => x.Type == connectionType)
-                    .Select(x => (x.LinkedId, x.Id))
+                    .Select(x => (x.LinkedId == personId ? x.MainId : x.LinkedId, x.Id))
                     .AsReadOnlyList();
 
 
                 var simpleConnections = new List<SimpleConnection>();
                 foreach (var specificPerson in specificTypePeople)
                 {
-                    var person = await _personRepository.ReadAsync(specificPerson.LinkedId);
+                    var person = await _personRepository.ReadAsync(specificPerson.Item1);
                     var simpleConnection = new SimpleConnection(person, specificPerson.Id);
                     simpleConnections.Add(simpleConnection);
                 }
-                return simpleConnections.Select(x => new SimplePerson(x.Person.FirstName, x.Person.LastName, connectionType, x.ConnectionId)).AsReadOnlyList(); 
+                return simpleConnections.Select(x => new SimplePerson(x.Person.FirstName, x.Person.LastName, connectionType, x.ConnectionId, x.Person.Id)).AsReadOnlyList(); 
             }
             public async Task<Networking> Handle(GetNetworkingQuery request, CancellationToken cancellationToken)
             {
@@ -44,13 +52,17 @@ namespace BasePerson.Application.Features.Person.Queries
                     throw new EntityNotFoundException();
 
 
-                var connectedPeople = (await _connectedPeopleRepository.ReadAsync(x => x.MainId == person.Id)).ToList();
+                var connectedPeople = (await _connectedPeopleRepository.ReadAsync(x => x.MainId == person.Id || x.LinkedId == person.Id)).ToList();
 
-                var relatives =  await GetSimplePeople(connectedPeople, Model.Enums.ConnectionType.Relative);
-                var acquaintances = await GetSimplePeople(connectedPeople, Model.Enums.ConnectionType.Acquaintance);
-                var colleagues = await GetSimplePeople(connectedPeople, Model.Enums.ConnectionType.Colleague);
+                
 
-                var networking = new Networking(request.Id, colleagues, acquaintances, relatives);
+                var relatives =  await GetSimplePeople(connectedPeople, Model.Enums.ConnectionType.Relative, request.Id);
+                var acquaintances = await GetSimplePeople(connectedPeople, Model.Enums.ConnectionType.Acquaintance, request.Id);
+                var colleagues = await GetSimplePeople(connectedPeople, Model.Enums.ConnectionType.Colleague, request.Id);
+
+                var targetPerson = await _personRepository.ReadAsync(request.Id);
+
+                var networking = new Networking(request.Id, $"{targetPerson.FirstName} {targetPerson.LastName}", colleagues, acquaintances, relatives);
                 return networking;
             }
         }

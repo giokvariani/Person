@@ -24,7 +24,7 @@ namespace BasePerson.Application.Features.Person
                     throw new EntityNotFoundException();
 
 
-                var connectedPeople = (await _connectedPeopleRepository.ReadAsync(x => x.MainId == personId)).ToList();
+                var connectedPeople = (await _connectedPeopleRepository.ReadAsync(x => x.MainId == personId || x.LinkedId == personId)).ToList();
                 await _connectedPeopleRepository.DeleteRangeAsync(connectedPeople);
 
                 var result = await _personRepository.DeleteAsync(personId);

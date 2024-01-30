@@ -17,12 +17,12 @@ namespace BasePerson.Application.Features.Person
             {
                 var personDto = request.PersonDto;
                 var idNumber = request.PersonDto.IDNumber;
-                var samePerson = (await _personRepository.ReadAsync(x => x.IDNumber == idNumber)).SingleOrDefault();
+                var samePerson = (await _personRepository.ReadAsync(x => x.IDNumber == idNumber && x.Id != request.PersonDto.Id)).SingleOrDefault();
 
                 if (samePerson != null)
                     throw new InvalidOperationException($"Person: {idNumber} already exists! ID:{samePerson.Id}");
 
-                var person = new Model.BusinessObjects.Person() { FirstName = personDto.FirstName, LastName = personDto.LastName, DateOfBirth = personDto.DateOfBirth, Gender = personDto.Gender, IDNumber = idNumber, Image = personDto.Image, UpdatedOn = DateTime.Now };
+                var person = new Model.BusinessObjects.Person() { Id = personDto.Id,  FirstName = personDto.FirstName, LastName = personDto.LastName, DateOfBirth = personDto.DateOfBirth, Gender = personDto.Gender, IDNumber = idNumber, Image = personDto.Image, UpdatedOn = DateTime.Now };
                 var result = await _personRepository.UpdateAsync(personDto.Id, person);
                 return result;
             }
