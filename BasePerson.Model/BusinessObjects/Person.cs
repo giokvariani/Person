@@ -10,7 +10,7 @@ namespace BasePerson.Model.BusinessObjects
         public string IDNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
         public IEnumerable<Phone2Person> Phones { get; set; }
-        public IEnumerable<ConnectedPerson> ConnectedPeople { get; set; }
+        public IEnumerable<ConnectedPeople> ConnectedPeople { get; set; }
         public string Image { get; set; }
     }
 }

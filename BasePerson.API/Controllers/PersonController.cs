@@ -1,6 +1,8 @@
 ﻿using BasePerson.Application.DTOs.Person;
 using BasePerson.Application.Features.Person;
+using BasePerson.Application.Features.Person.Commands;
 using BasePerson.Application.Features.Person.Queries;
+using BasePerson.Model.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +32,30 @@ namespace BasePerson.API.Controllers
             var query = new GetPeopleQuery();
             var people = await _mediator.Send(query);
             return Ok(people);
+        }
+
+        [HttpPost("ConnectPeople")]
+        public async Task<IActionResult> ConnectPeople(ConnectedPeopleDto connectedPeople)
+        {
+            var command = new ConnectPeopleCommand(connectedPeople);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpDelete("DisconnectPeople")]
+        public async Task<IActionResult> DisconnectPeople(int id)
+        {
+            var command = new DisconnectPeopleCommand(id);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet("Networking")]
+        public async Task<IActionResult> Networking(int id)
+        {
+            var query = new GetNetworkingQuery(id);
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         [HttpPost]
