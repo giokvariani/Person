@@ -23,7 +23,6 @@ namespace BasePerson.Application.Features.Person.Commands
                 _connectedPeopleRepository = connectedPeopleRepository;
                 _personRepository = personRepository;
             }
-
             public async Task<int> Handle(ConnectPeopleCommand request, CancellationToken cancellationToken)
             {
                 var peopleDto = request.PeopleDto;

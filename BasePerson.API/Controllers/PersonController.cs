@@ -43,9 +43,9 @@ namespace BasePerson.API.Controllers
         }
 
         [HttpDelete("DisconnectPeople")]
-        public async Task<IActionResult> DisconnectPeople(int id)
+        public async Task<IActionResult> DisconnectPeople(int connectionId)
         {
-            var command = new DisconnectPeopleCommand(id);
+            var command = new DisconnectPeopleCommand(connectionId);
             var result = await _mediator.Send(command);
             return Ok(result);
         }
@@ -55,6 +55,22 @@ namespace BasePerson.API.Controllers
         {
             var query = new GetNetworkingQuery(id);
             var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpGet("Numbers")]
+        public async Task<IActionResult> Numbers(int id)
+        {
+            var query = new GetNumbersQuery(id);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpPost("AddNumberCommand")]
+        public async Task<IActionResult> AddPhone(int phoneId, int personId)
+        {
+            var command = new AddNumberCommand(phoneId, personId);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
 

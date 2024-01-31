@@ -29,6 +29,7 @@ services.AddScoped<ICityRepository, CityRepository>();
 services.AddScoped<IPersonRepository, PersonRepository>();
 services.AddScoped<IPhoneRepository, PhoneRepository>();
 services.AddScoped<IConnectedPeopleRepository, ConnectedPeopleRepository>();
+services.AddScoped<IPhone2PersonRepository, Phone2PersonRepository>();
 
 
 

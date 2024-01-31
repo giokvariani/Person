@@ -18,7 +18,7 @@ namespace BasePerson.Application.Features.Phone.Commands
             public async Task<int> Handle(UpdatePhoneCommand request, CancellationToken cancellationToken)
             {
                 var phoneDto = request.PhoneDto;
-                var samePhone = (await _phoneRepository.ReadAsync(x => x.Number == phoneDto.Number)).SingleOrDefault();
+                var samePhone = (await _phoneRepository.ReadAsync(x => x.Number == phoneDto.Number && x.Id != phoneDto.Id)).SingleOrDefault();
 
                 if (samePhone != null)
                     throw new InvalidOperationException($"Phone: {samePhone.Number} already exists! ID:{samePhone.Id}");

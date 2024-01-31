@@ -16,10 +16,18 @@ namespace BasePerson.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Phone(int id)
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> Phone(int id)
+        //{
+        //    var query = new GetPhoneQuery(id);
+        //    var result = await _mediator.Send(query);
+        //    return Ok(result);
+        //}
+
+        [HttpGet("{number}")]
+        public async Task<IActionResult> Phone(string number)
         {
-            var query = new GetPhoneQuery(id);
+            var query = new GetPhoneQuery(number);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
