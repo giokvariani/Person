@@ -11,10 +11,12 @@ namespace BasePerson.Application.Features.Person
         {
             private readonly IPersonRepository _personRepository;
             private readonly IConnectedPeopleRepository _connectedPeopleRepository;
-            public DeletePersonCommandHandler(IPersonRepository personRepository, IConnectedPeopleRepository connectedPeopleRepository)
+            private readonly IPhone2PersonRepository _phone2PersonReposittory;
+            public DeletePersonCommandHandler(IPersonRepository personRepository, IConnectedPeopleRepository connectedPeopleRepository, IPhone2PersonRepository phone2PersonReposittory)
             {
                 _personRepository = personRepository;
                 _connectedPeopleRepository = connectedPeopleRepository;
+                _phone2PersonReposittory = phone2PersonReposittory;
             }
             public async Task<int> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
             {
@@ -26,6 +28,9 @@ namespace BasePerson.Application.Features.Person
 
                 var connectedPeople = (await _connectedPeopleRepository.ReadAsync(x => x.MainId == personId || x.LinkedId == personId)).ToList();
                 await _connectedPeopleRepository.DeleteRangeAsync(connectedPeople);
+
+                var phonesToPerson = (await _phone2PersonReposittory.ReadAsync(x => x.PersonId == request.Id)).ToList();
+                await _phone2PersonReposittory.DeleteRangeAsync(phonesToPerson);
 
                 var result = await _personRepository.DeleteAsync(personId);
                 return result;

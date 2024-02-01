@@ -66,10 +66,18 @@ namespace BasePerson.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("AddNumberCommand")]
-        public async Task<IActionResult> AddPhone(int phoneId, int personId)
+        [HttpPost("AddNumber")]
+        public async Task<IActionResult> AddNumber(int phoneId, int personId)
         {
             var command = new AddNumberCommand(phoneId, personId);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpDelete("RemoveNumber")]
+        public async Task<IActionResult> RemoveNumber(int connectionId)
+        {
+            var command = new DeleteNumberCommand(connectionId);
             var result = await _mediator.Send(command);
             return Ok(result);
         }
