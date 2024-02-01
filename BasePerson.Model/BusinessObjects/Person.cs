@@ -12,5 +12,7 @@ namespace BasePerson.Model.BusinessObjects
         public IEnumerable<Phone2Person> Phones { get; set; }
         public IEnumerable<ConnectedPeople> ConnectedPeople { get; set; }
         public string Image { get; set; }
+        public int CityId { get; set; }
+        public City City { get; set; }
     }
 }

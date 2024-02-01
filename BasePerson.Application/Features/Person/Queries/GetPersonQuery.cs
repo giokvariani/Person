@@ -1,4 +1,5 @@
-﻿using BasePerson.Application.DTOs.Person;
+﻿using BasePerson.Application.DTOs.City;
+using BasePerson.Application.DTOs.Person;
 using BasePerson.Application.Exceptions;
 using BasePerson.Application.Interfaces;
 using MediatR;
@@ -21,7 +22,8 @@ namespace BasePerson.Application.Features.Person.Queries
                 var person = await _personRepository.ReadAsync(request.Id);
                 if (person == null)
                     throw new EntityNotFoundException();
-                var existingPersonDto = new ExistingPersonDto() { FirstName = person.FirstName, LastName = person.LastName, DateOfBirth = person.DateOfBirth, Gender = person.Gender, Id = person.Id, IDNumber = person.IDNumber, Image = person.Image };
+                var cityDto = new CityDto() { Name = person.City.Name };
+                var existingPersonDto = new GetPersonDto() { FirstName = person.FirstName, LastName = person.LastName, DateOfBirth = person.DateOfBirth, Gender = person.Gender, Id = person.Id, IDNumber = person.IDNumber, Image = person.Image, CityId = person.CityId, City = cityDto };
                 return existingPersonDto;
             }
         }

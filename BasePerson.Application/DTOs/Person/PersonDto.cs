@@ -10,5 +10,6 @@ namespace BasePerson.Application.DTOs.Person
         public string IDNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Image { get; set; }
+        public int CityId { get; set; }
     }
 }

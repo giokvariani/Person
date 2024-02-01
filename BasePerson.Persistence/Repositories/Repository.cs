@@ -30,7 +30,11 @@ namespace BasePerson.Persistence.Repositories
         }
         public virtual async Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await context.Set<TEntity>().Where(predicate).ToListAsync();
+            return await ReadCustom(predicate).ToListAsync();
+        }
+        protected virtual IQueryable<TEntity> ReadCustom(Expression<Func<TEntity, bool>> predicate)
+        {
+            return context.Set<TEntity>().Where(predicate);
         }
         public virtual async Task<IEnumerable<TEntity>> ReadAsync()
         {
