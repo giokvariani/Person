@@ -23,7 +23,7 @@ namespace BasePerson.Application.Features.Phone.Commands
                 if (existingPhone != null)
                     throw new InvalidOperationException($"Phone: {number} already exists.");
 
-                var phone = new Model.BusinessObjects.Phone() { CreatedOn = DateTime.Now, Number = number };
+                var phone = new Model.BusinessObjects.Phone() { CreatedOn = DateTime.Now, Number = number, Type = request.PhoneDto.Type};
                 var result = await _phoneRepository.CreateAsync(phone);
                 return result;
             }

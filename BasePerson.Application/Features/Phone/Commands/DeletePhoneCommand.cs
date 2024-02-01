@@ -26,7 +26,7 @@ namespace BasePerson.Application.Features.Phone.Commands
                 if (existingPhone == null)
                     throw new EntityNotFoundException();
 
-                var phone2Person = (await _phone2PersonRepository.ReadAsync(x => x.PhoneId == x.PhoneId)).AsReadOnlyList();
+                var phone2Person = (await _phone2PersonRepository.ReadAsync(x => x.PhoneId == phoneId)).AsReadOnlyList();
                 await _phone2PersonRepository.DeleteRangeAsync(phone2Person);
 
                 var result = await _phoneRepository.DeleteAsync(phoneId);
