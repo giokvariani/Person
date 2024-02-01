@@ -41,9 +41,9 @@ namespace BasePerson.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePerson(int id)
+        public async Task<IActionResult> DeletePhone(int id)
         {
-            var command = new DeletePersonCommand { Id = id };
+            var command = new DeletePhoneCommand { Id = id };
             var result = await _mediator.Send(command);
             return Ok(result);
         }
