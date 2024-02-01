@@ -1,8 +1,10 @@
 using BasePerson.API.Middlewares;
 using BasePerson.Application.DTOs.City;
 using BasePerson.Application.Interfaces;
+using BasePerson.Application.Services;
 using BasePerson.Persistence.DataLayer;
 using BasePerson.Persistence.Repositories;
+using BasePerson.Persistence.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +32,8 @@ services.AddScoped<IPersonRepository, PersonRepository>();
 services.AddScoped<IPhoneRepository, PhoneRepository>();
 services.AddScoped<IConnectedPeopleRepository, ConnectedPeopleRepository>();
 services.AddScoped<IPhone2PersonRepository, Phone2PersonRepository>();
+services.AddScoped<IImageService, ImageService>();
+
 
 
 

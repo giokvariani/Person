@@ -1,4 +1,5 @@
 ﻿using BasePerson.Application.DTOs.Person;
+using BasePerson.Application.Features.Image;
 using BasePerson.Application.Features.Person;
 using BasePerson.Application.Features.Person.Commands;
 using BasePerson.Application.Features.Person.Queries;
@@ -95,6 +96,14 @@ namespace BasePerson.API.Controllers
         public async Task<IActionResult> DeletePerson(int id)
         {
             var command = new DeletePersonCommand { Id = id };
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPut("UploadImage")]
+        public async Task<IActionResult> UploadImage(int personId, IFormFile formFile)
+        {
+            var command = new UploadImageCommand(personId, formFile);
             var result = await _mediator.Send(command);
             return Ok(result);
         }
