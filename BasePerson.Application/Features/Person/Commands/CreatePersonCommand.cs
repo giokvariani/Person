@@ -22,7 +22,7 @@ namespace BasePerson.Application.Features.Person
                 if (existingPerson != null)
                     throw new InvalidOperationException($"Person: {idNumber} already exists.");
 
-                var person = new Model.BusinessObjects.Person() { FirstName = personDto.FirstName, LastName = personDto.LastName, CreatedOn = DateTime.Now, DateOfBirth = personDto.DateOfBirth, Gender = personDto.Gender, IDNumber = idNumber, Image = personDto.Image };
+                var person = new Model.BusinessObjects.Person() { FirstName = personDto.FirstName, LastName = personDto.LastName, CreatedOn = DateTime.Now, DateOfBirth = personDto.DateOfBirth, Gender = personDto.Gender, IDNumber = idNumber, Image = personDto.Image, CityId = personDto.CityId };
                 var result = await _personRepository.CreateAsync(person);
                 return result;
             }

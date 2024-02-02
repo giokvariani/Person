@@ -3,7 +3,6 @@ using BasePerson.Application.Features.Image;
 using BasePerson.Application.Features.Person;
 using BasePerson.Application.Features.Person.Commands;
 using BasePerson.Application.Features.Person.Queries;
-using BasePerson.Model.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
